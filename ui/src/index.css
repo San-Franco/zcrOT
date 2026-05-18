@@ -60,6 +60,7 @@
 }
 
 :root {
+  --zcrot-app-zoom: 0.8;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -135,6 +136,23 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  @supports (zoom: 1) {
+    @media (min-width: 768px) {
+      body {
+        zoom: var(--zcrot-app-zoom);
+      }
+    }
+  }
+
+  @supports not (zoom: 1) {
+    @media (min-width: 768px) {
+      html {
+        font-size: calc(100% * var(--zcrot-app-zoom));
+      }
+    }
+  }
+
   html {
       scroll-behavior: smooth;
       scroll-padding-top: 100px;
