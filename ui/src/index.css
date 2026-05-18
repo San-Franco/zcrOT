@@ -137,19 +137,9 @@
     @apply bg-background text-foreground;
   }
 
-  @supports (zoom: 1) {
-    @media (min-width: 768px) {
-      body {
-        zoom: var(--zcrot-app-zoom);
-      }
-    }
-  }
-
-  @supports not (zoom: 1) {
-    @media (min-width: 768px) {
-      html {
-        font-size: calc(100% * var(--zcrot-app-zoom));
-      }
+  @media (min-width: 768px) {
+    html {
+      font-size: calc(100% * var(--zcrot-app-zoom));
     }
   }
 
