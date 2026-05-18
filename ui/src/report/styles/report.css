@@ -1,0 +1,1765 @@
+.report-workspace,
+.report-print-root {
+  --report-bg: #f8fafc;
+  --report-surface: #ffffff;
+  --report-text: #0f172a;
+  --report-text-secondary: #475569;
+  --report-muted: #64748b;
+  --report-border: #e2e8f0;
+  --report-primary: #3b82f6;
+  --report-primary-dark: #1e40af;
+  --report-accent: #6366f1;
+  --report-accent-light: #e0e7ff;
+  --report-success: #10b981;
+  --report-success-light: #d1fae5;
+  --report-warning: #f59e0b;
+  --report-warning-light: #fef3c7;
+  --report-danger: #ef4444;
+  --report-danger-light: #fee2e2;
+  --report-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.report-generator-card,
+.report-result-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(26, 31, 46, 0.96) 0%, rgba(13, 20, 36, 0.96) 100%);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.report-generator-card::before,
+.report-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom right, rgba(47, 128, 237, 0.1), transparent 55%, rgba(123, 97, 255, 0.08));
+}
+
+.report-generator-card > *,
+.report-result-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.report-generator-card {
+  overflow: visible;
+  z-index: 30;
+}
+
+.report-result-card {
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 1rem;
+  z-index: 10;
+}
+
+.report-generating-modal {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(22, 28, 44, 0.98) 0%, rgba(14, 21, 38, 0.98) 100%);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.report-generating-description {
+  margin-top: 10px;
+  font-size: 8.25pt;
+  line-height: 1.45;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.report-state-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(26, 31, 46, 0.96) 0%, rgba(13, 20, 36, 0.96) 100%);
+}
+
+.report-container {
+  padding: 2rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background: transparent !important;
+  border-radius: 12px !important;
+}
+
+.report-page {
+  width: 210mm;
+  height: 297mm; /* Fixed A4 portrait height */
+  min-height: 297mm;
+  padding: 0.375in 0.45in; /* Reduced padding for more content space */
+  margin: 0 auto;
+  background: var(--report-surface);
+  color: var(--report-text);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 10pt;
+  line-height: 1.5; /* Slightly reduced line height */
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--report-shadow-lg);
+  border-radius: 8px;
+  counter-increment: report-page;
+}
+
+.report-page-fit {
+  width: 100%;
+}
+
+.page-break-before {
+  page-break-before: always;
+  break-before: page;
+}
+
+.page-break-after {
+  page-break-after: always;
+  break-after: page;
+}
+
+.avoid-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.report-section-header {
+  margin-bottom: 0.875rem; /* Reduced from 1rem */
+}
+
+.report-section-title {
+  margin: 0 0 0.375rem 0; /* Reduced from 0.5rem */
+  padding-bottom: 0.3125rem; /* Reduced from 0.375rem */
+  border-bottom: 2px solid var(--report-accent-light);
+  font-size: 1.375rem; /* Reduced from 1.5rem */
+  font-weight: 700;
+  color: var(--report-primary-dark);
+  line-height: 1.2;
+}
+
+.report-section-subtitle {
+  color: var(--report-muted);
+  font-size: 0.95rem;
+}
+
+.report-story-block {
+  margin-bottom: 0.875rem; /* Reduced from 1rem */
+}
+
+.report-summary-block,
+.report-recommendation-block {
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem; /* Reduced from 0.875rem 1.125rem */
+  border: 1px solid var(--report-border);
+}
+
+.report-summary-block {
+  background: var(--report-accent-light);
+  border-left: 4px solid var(--report-accent);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.report-summary-block--warning {
+  background: var(--report-warning-light);
+  border-left-color: var(--report-warning);
+}
+
+.report-summary-text,
+.report-recommendation-text {
+  margin: 0;
+  font-size: 0.9rem; /* Reduced from 0.95rem */
+  line-height: 1.5; /* Reduced from 1.55 */
+  color: var(--report-text);
+}
+
+.report-summary-text--muted {
+  color: #92400e;
+}
+
+.report-technical-details-header {
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.report-evidence-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Reduced from 1rem */
+}
+
+.report-block-title,
+.report-panel-title,
+.report-chart-title {
+  margin: 0 0 0.625rem 0; /* Reduced from 0.75rem */
+  color: var(--report-primary-dark);
+  font-size: 0.9375rem; /* Reduced from 1rem */
+  font-weight: 700;
+}
+
+.report-recommendation-block {
+  margin-top: 0.875rem; /* Reduced from 1rem */
+  background: #f8fafc;
+  border-left: 4px solid var(--report-primary);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.report-summary-split,
+.report-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem; /* Reduced from 1rem */
+  align-items: start;
+}
+
+.report-three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.report-evidence-panel,
+.report-highlight-panel,
+.report-chart-container,
+.report-kpi-card,
+.report-highlight-box {
+  background: var(--report-bg);
+  border: 1px solid var(--report-border);
+  border-radius: 12px;
+}
+
+.report-evidence-panel,
+.report-highlight-panel {
+  padding: 0.875rem; /* Reduced from 1rem */
+}
+
+.report-highlight-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; /* Reduced from 0.5rem */
+  font-size: 0.85rem; /* Reduced from 0.9rem */
+  color: var(--report-text);
+}
+
+.report-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem; /* Reduced from 0.75rem */
+  margin-bottom: 0.625rem; /* Reduced from 0.75rem */
+}
+
+.report-kpi-card {
+  padding: 0.5rem 0.625rem; /* Reduced from 0.625rem 0.75rem */
+  background: var(--report-surface);
+  border-radius: 8px; /* Reduced from 12px */
+  border: 1px solid var(--report-border);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem; /* Reduced from 0.25rem */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  min-width: 0;
+}
+
+.report-kpi-card-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.report-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px; /* Increased for better visibility */
+  border-radius: 8px 8px 0 0; /* Match card border radius */
+}
+
+.report-kpi-card--good::before {
+  background: var(--report-success); /* Solid color instead of gradient */
+}
+
+.report-kpi-card--warning::before {
+  background: var(--report-warning); /* Solid color instead of gradient */
+}
+
+.report-kpi-card--danger::before {
+  background: var(--report-danger); /* Solid color instead of gradient */
+}
+
+.report-kpi-card--neutral::before {
+  background: var(--report-primary); /* Solid color instead of gradient */
+}
+
+.report-kpi-value {
+  font-size: 1.5rem; /* Reduced from 1.625rem */
+  font-weight: 800;
+  color: var(--report-text);
+  line-height: 1;
+  margin-top: 0.125rem; /* Reduced from 0.25rem */
+  letter-spacing: -0.02em;
+}
+
+.report-kpi-label {
+  font-size: 0.6875rem; /* Reduced from 0.75rem */
+  font-weight: 700;
+  color: var(--report-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.report-kpi-subtext {
+  font-size: 0.75rem; /* Reduced from 0.8rem */
+  color: var(--report-muted);
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+/* Executive Summary - 3 Layer Layout */
+.report-observed-conditions {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.75rem 0.875rem; /* Reduced from 0.875rem 1rem */
+  margin-top: 0.625rem; /* Reduced from 0.75rem */
+  margin-bottom: 0.625rem; /* Reduced from 0.75rem */
+}
+
+.report-conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem; /* Reduced from 0.75rem */
+  margin-top: 0.5rem; /* Reduced from 0.75rem */
+}
+
+.report-condition-block {
+  background: var(--report-bg);
+  border: 1px solid var(--report-border);
+  border-radius: 6px;
+  padding: 0.625rem 0.875rem; /* Reduced from 0.75rem 1rem */
+  transition: all 0.2s ease;
+}
+
+.report-condition-block:hover {
+  border-color: var(--report-accent-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.report-condition-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Reduced from 0.625rem */
+  padding-bottom: 0.375rem; /* Reduced from 0.5rem */
+  border-bottom: 1px solid var(--report-border);
+}
+
+.report-condition-title {
+  font-size: 0.65rem; /* Reduced from 0.7rem */
+  font-weight: 700;
+  color: var(--report-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.report-condition-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; /* Reduced from 0.5rem */
+}
+
+.report-condition-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3125rem; /* Reduced from 0.375rem */
+}
+
+.report-condition-label {
+  font-size: 0.65rem; /* Reduced from 0.7rem */
+  color: var(--report-text-muted);
+  font-weight: 500;
+}
+
+.report-condition-value {
+  font-size: 0.75rem; /* Reduced from 0.8rem */
+  font-weight: 700;
+  color: var(--report-text);
+  white-space: nowrap;
+}
+
+.report-condition-value-small {
+  font-size: 0.625rem; /* Reduced from 0.65rem */
+  font-weight: 600;
+  color: var(--report-text);
+  text-align: right;
+  max-width: 60%;
+  word-break: break-word;
+  line-height: 1.3;
+}
+
+.report-ai-summary {
+  background: linear-gradient(135deg, var(--report-accent-light) 0%, var(--report-surface) 100%);
+  border: 1px solid var(--report-accent-light);
+  border-left: 4px solid var(--report-accent);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+/* Page break avoidance for Executive Summary sections */
+.report-kpi-grid.avoid-break,
+.report-observed-conditions.avoid-break,
+.report-ai-summary.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.report-ai-summary-text {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--report-text);
+  font-style: italic;
+}
+
+/* Environment Overview - 2 Layer Layout (A4 Optimized) */
+.report-monitoring-context {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.875rem;
+}
+
+.report-context-text {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--report-text);
+}
+
+.report-scope-coverage {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Expanded table for scope & coverage to fill space */
+.report-expanded-table td {
+  padding: 0.65rem 0;
+  font-size: 0.925rem;
+  line-height: 1.5;
+}
+
+/* Page break avoidance for Environment Overview sections */
+.report-monitoring-context.avoid-break,
+.report-scope-coverage.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Compact table for merged scope & coverage section */
+.report-compact-table td {
+  padding: 0.45rem 0;
+}
+
+/* Coverage & Confidence - 3 Layer Layout + Footnote (A4 Optimized) */
+.report-coverage-summary {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.875rem;
+}
+
+.report-coverage-assessment {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.875rem 1.125rem;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.report-page-footnote {
+  margin: 0.75rem 0 0.5rem;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--report-text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+/* Compact table headers for coverage assessment */
+.report-coverage-assessment th {
+  text-align: left;
+  padding: 0.5rem 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--report-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--report-border);
+}
+
+.report-coverage-assessment td {
+  padding: 0.45rem 0.45rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+/* Page break avoidance for Coverage & Confidence sections */
+.report-coverage-summary.avoid-break,
+.report-kpi-grid.avoid-break,
+.report-coverage-assessment.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Asset Visibility - 3 Layer Layout (A4 Optimized) */
+.report-asset-summary {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.875rem;
+}
+
+.report-asset-snapshot {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  padding: 0.875rem 1.125rem;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Compact table for asset snapshot */
+.report-asset-snapshot th {
+  text-align: left;
+  padding: 0.5rem 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--report-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--report-border);
+}
+
+.report-asset-snapshot td {
+  padding: 0.45rem 0.45rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+/* Page break avoidance for Asset Visibility sections */
+.report-asset-summary.avoid-break,
+.report-kpi-grid.avoid-break,
+.report-asset-snapshot.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Communication & Control - 4 Layer Layout (A4 Optimized) */
+.report-comm-summary {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 6px;
+  padding: 0.375rem 0.625rem; /* Reduced from 0.5rem 0.75rem */
+  margin-bottom: 0.375rem; /* Reduced from 0.5rem */
+}
+
+.report-comm-summary .report-summary-text {
+  font-size: 0.8rem; /* Reduced from 0.825rem */
+  line-height: 1.35; /* Reduced from 1.4 */
+  color: var(--report-text);
+  margin: 0.1875rem 0 0; /* Reduced from 0.25rem */
+}
+
+.report-comm-evidence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.375rem; /* Reduced from 0.5rem */
+  margin-top: 0.375rem; /* Reduced from 0.5rem */
+  margin-bottom: 0.375rem; /* Reduced from 0.5rem */
+}
+
+.report-evidence-block {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.625rem; /* Reduced from 0.625rem 0.75rem */
+}
+
+.report-evidence-block .report-panel-title {
+  font-size: 0.75rem; /* Reduced from 0.8rem */
+  margin-bottom: 0.3125rem; /* Reduced from 0.375rem */
+}
+
+/* Compact key-value tables in evidence blocks */
+.report-evidence-block .report-compact-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.report-evidence-block .report-compact-table td {
+  padding: 0.375rem 0.625rem; /* Reduced from 0.5rem 0.75rem */
+  font-size: 0.75rem; /* Reduced from 0.8rem */
+  line-height: 1.3; /* Reduced from 1.35 */
+  vertical-align: middle;
+  border-bottom: 1px solid var(--report-border);
+}
+
+.report-evidence-block .report-compact-table td:first-child {
+  font-weight: 600;
+  color: var(--report-text-secondary);
+  width: 50%;
+  padding-right: 1.25rem; /* Reduced from 1.5rem */
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.report-evidence-block .report-compact-table td:last-child {
+  width: 50%;
+  text-align: left;
+  font-weight: 600;
+  color: var(--report-text);
+  white-space: normal;
+  word-wrap: break-word;
+  padding-left: 1rem;
+}
+
+.report-notable-paths {
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem; /* Reduced from 0.625rem 0.875rem */
+  margin-top: 0.375rem; /* Reduced from 0.5rem */
+  margin-bottom: 0.25rem; /* Reduced from 0.375rem */
+}
+
+.report-notable-paths .report-panel-title {
+  font-size: 0.75rem; /* Reduced from 0.8rem */
+  margin-bottom: 0.3125rem; /* Reduced from 0.375rem */
+}
+
+.report-table-footer {
+  margin: 0.25rem 0 0; /* Reduced from 0.375rem */
+  padding: 0;
+  font-size: 0.7rem; /* Reduced from 0.75rem */
+  color: var(--report-text-secondary);
+  font-style: italic;
+  text-align: right;
+}
+
+/* Compact table for communication paths */
+.report-notable-paths .report-compact-table {
+  font-size: 0.72rem; /* Reduced from 0.75rem */
+  line-height: 1.2; /* Reduced from 1.25 */
+}
+
+.report-notable-paths th {
+  text-align: left;
+  padding: 0.25rem 0.1875rem; /* Reduced from 0.3125rem 0.25rem */
+  font-size: 0.65rem; /* Reduced from 0.7rem */
+  font-weight: 700;
+  color: var(--report-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1.5px solid var(--report-border);
+  white-space: nowrap;
+}
+
+.report-notable-paths td {
+  padding: 0.1875rem 0.1875rem; /* Reduced from 0.25rem 0.25rem */
+  font-size: 0.72rem; /* Reduced from 0.75rem */
+  line-height: 1.25; /* Reduced from 1.3 */
+  vertical-align: middle;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 0;
+}
+
+/* Page break avoidance for Communication sections */
+.report-comm-summary.avoid-break,
+.report-kpi-grid.avoid-break,
+.report-comm-evidence.avoid-break,
+.report-notable-paths.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* A4 Page Overflow Prevention - Communication Page */
+.report-page[data-page-id="communication-overview"] {
+  max-height: 297mm; /* A4 portrait height */
+  overflow: hidden;
+  padding: 0.3125in 0.375in; /* Reduced padding for A4 */
+}
+
+.report-page[data-page-id="communication-overview"] .report-page-content {
+  max-height: 270mm;
+  overflow: hidden;
+  gap: 0.375rem; /* Reduced gap */
+}
+
+/* A4 Page Optimization - Risk Observations & Alerts Page */
+.report-page[data-page-id="alerts-and-risk-findings"] {
+  max-height: 297mm;
+  overflow: hidden;
+  padding: 0.1875in 0.25in; /* Ultra-compact padding */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-page-content {
+  max-height: 280mm;
+  overflow: hidden;
+  gap: 0.1875rem; /* Ultra-compact gap */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-section-header {
+  margin-bottom: 0.1875rem; /* Ultra-compact */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-section-title {
+  font-size: 1rem; /* Ultra-compact */
+  margin-bottom: 0.0625rem;
+  padding-bottom: 0.125rem;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-technical-details-header {
+  font-size: 0.625rem; /* Ultra-compact */
+  margin-bottom: 0.1875rem;
+  padding-bottom: 0.125rem;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-story-block {
+  margin-bottom: 0.1875rem; /* Ultra-compact */
+  padding: 0.1875rem 0.375rem; /* Ultra-compact */
+  font-size: 7pt; /* Ultra-compact */
+  line-height: 1.25; /* Ultra-compact */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-text {
+  font-size: 7pt; /* Ultra-compact */
+  line-height: 1.25; /* Ultra-compact */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-grid {
+  margin-bottom: 0.1875rem; /* Ultra-compact */
+  gap: 0.1875rem; /* Ultra-compact */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-evidence-row {
+  display: flex;
+  gap: 0.1875rem; /* Ultra-compact from 0.6rem */
+  margin-bottom: 0.1875rem; /* Ultra-compact from 0.6rem */
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-evidence-block {
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem 0.375rem; /* Ultra-compact from 0.6rem 0.8rem */
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 6px;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-evidence-title {
+  font-size: 0.625rem; /* Ultra-compact from 0.85rem */
+  font-weight: 700;
+  color: var(--report-primary-dark);
+  margin: 0 0 0.125rem 0; /* Ultra-compact from 0.4rem */
+  padding-bottom: 0.0625rem; /* Ultra-compact from 0.3rem */
+  border-bottom: 1px solid var(--report-border);
+}
+
+/* Compact table styling for risk page */
+.report-page[data-page-id="alerts-and-risk-findings"] .report-compact-table td {
+  padding: 0.125rem 0.375rem; /* Ultra-compact from 0.4rem 0.75rem */
+  font-size: 0.6rem; /* Ultra-compact from 0.78rem */
+  line-height: 1.2;
+}
+
+/* Report table ultra-compact for A4 */
+.report-page[data-page-id="alerts-and-risk-findings"] .report-table {
+  margin-bottom: 0.125rem; /* Ultra-compact */
+  font-size: 0.6rem; /* Ultra-compact */
+  line-height: 1.15;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-table td,
+.report-page[data-page-id="alerts-and-risk-findings"] .report-table th {
+  padding: 0.125rem 0.25rem; /* Ultra-compact */
+  font-size: 0.6rem; /* Ultra-compact */
+  line-height: 1.15;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-table thead th {
+  padding: 0.125rem 0.25rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+
+/* Ultra-compact KPI cards for risk page */
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-card {
+  padding: 0.25rem 0.375rem; /* Ultra-compact */
+  gap: 0.0625rem;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-card::before {
+  height: 1.5px;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-value {
+  font-size: 1.125rem; /* Ultra-compact */
+  margin-top: 0.03125rem;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.03em;
+}
+
+.report-page[data-page-id="alerts-and-risk-findings"] .report-kpi-subtext {
+  font-size: 0.5625rem;
+  line-height: 1.15;
+}
+
+/* A4 Page Optimization - Detection Readiness Page */
+.report-page[data-page-id="detection-rule-summary"] {
+  max-height: 297mm;
+  overflow: hidden;
+  padding: 0.1875in 0.25in; /* Ultra-aggressive padding reduction */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-page-content {
+  max-height: 280mm;
+  overflow: hidden;
+  gap: 0.1875rem; /* Ultra-aggressive gap reduction */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-section-header {
+  margin-bottom: 0.1875rem; /* Ultra-aggressive */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-section-title {
+  font-size: 1rem; /* Ultra-aggressive from 1.125rem */
+  margin-bottom: 0.0625rem;
+  padding-bottom: 0.125rem;
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-technical-details-header {
+  font-size: 0.625rem; /* Ultra-aggressive from 0.6875rem */
+  margin-bottom: 0.1875rem;
+  padding-bottom: 0.125rem;
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-story-block {
+  margin-bottom: 0.1875rem; /* Ultra-aggressive from 0.25rem */
+  padding: 0.1875rem 0.375rem; /* Ultra-aggressive from 0.25rem 0.5rem */
+  font-size: 7pt; /* Ultra-aggressive from 7.5pt */
+  line-height: 1.25; /* Ultra-aggressive from 1.3 */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-text {
+  font-size: 7pt; /* Ultra-aggressive from 7.5pt */
+  line-height: 1.25; /* Ultra-aggressive from 1.3 */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-grid {
+  margin-bottom: 0.1875rem; /* Ultra-aggressive from 0.25rem */
+  gap: 0.1875rem; /* Ultra-aggressive from 0.25rem */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-evidence-title {
+  font-size: 0.625rem; /* Ultra-aggressive from 0.6875rem */
+  font-weight: 700;
+  color: var(--report-primary-dark);
+  margin: 0 0 0.125rem 0; /* Ultra-aggressive from 0.1875rem */
+  padding-bottom: 0.0625rem; /* Ultra-aggressive from 0.125rem */
+  border-bottom: 1px solid var(--report-border);
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-chart-col--wide {
+  margin-top: 0.125rem !important; /* Ultra-aggressive from 0.1875rem */
+  margin-bottom: 0;
+  padding: 0.1875rem 0.375rem; /* Ultra-aggressive from 0.25rem 0.5rem */
+}
+
+/* Ultra-aggressive chart container */
+.report-page[data-page-id="detection-rule-summary"] .report-chart-container-compact {
+  height: 65px !important; /* Ultra-aggressive from 80px */
+  margin-top: 0.0625rem !important;
+}
+
+/* Report table ULTRA-aggressive compact for A4 - Detection Readiness */
+.report-page[data-page-id="detection-rule-summary"] .report-table {
+  margin-bottom: 0.125rem; /* Ultra-aggressive from 0.1875rem */
+  font-size: 0.6rem; /* Ultra-aggressive from 0.65rem */
+  line-height: 1.15; /* Ultra-aggressive from 1.2 */
+}
+
+/* Ultra-aggressive table cells for detection readiness */
+.report-page[data-page-id="detection-rule-summary"] .report-table td,
+.report-page[data-page-id="detection-rule-summary"] .report-table th {
+  padding: 0.125rem 0.25rem; /* Ultra-aggressive from 0.1875rem 0.375rem */
+  font-size: 0.6rem; /* Ultra-aggressive from 0.65rem */
+  line-height: 1.15; /* Ultra-aggressive from 1.2 */
+  vertical-align: top;
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-table thead th {
+  padding: 0.125rem 0.25rem; /* Ultra-aggressive from 0.1875rem 0.375rem */
+  font-size: 0.55rem; /* Ultra-aggressive from 0.6rem */
+  font-weight: 700;
+}
+
+/* Ultra-aggressive KPI cards for A4 - Detection Readiness */
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-card {
+  padding: 0.25rem 0.375rem; /* Ultra-aggressive from 0.3rem 0.5rem */
+  gap: 0.0625rem; /* Ultra-aggressive from 0.125rem */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-card::before {
+  height: 1.5px; /* Ultra-aggressive from 2px */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-value {
+  font-size: 1.125rem; /* Ultra-aggressive from 1.25rem */
+  margin-top: 0.03125rem; /* Ultra-aggressive from 0.0625rem */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-label {
+  font-size: 0.55rem; /* Ultra-aggressive from 0.6rem */
+  letter-spacing: 0.03em; /* Ultra-aggressive from 0.04em */
+}
+
+.report-page[data-page-id="detection-rule-summary"] .report-kpi-subtext {
+  font-size: 0.5625rem; /* Ultra-aggressive from 0.625rem */
+  line-height: 1.15; /* Ultra-aggressive from 1.2 */
+}
+
+/* A4 Page Optimization - Conclusion Page */
+.report-page[data-page-id="conclusion-and-next-steps"] {
+  max-height: 297mm;
+  overflow: hidden;
+  padding: 0.3125in 0.375in; /* Reduced padding for A4 */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-page-content {
+  max-height: 275mm;
+  overflow: hidden;
+  gap: 0.375rem; /* Reduced from 0.6rem */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-section-header {
+  margin-bottom: 0.5rem; /* Reduced from 0.85rem */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-section-title {
+  font-size: 1.25rem; /* Reduced for A4 */
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-story-block {
+  margin-bottom: 0.375rem; /* Reduced from 0.75rem */
+  padding: 0.375rem 0.625rem; /* Reduced from 0.6rem 0.85rem */
+  font-size: 8.5pt; /* Reduced from 9pt */
+  line-height: 1.4; /* Reduced from 1.5 */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-text {
+  font-size: 8.5pt; /* Reduced from 9pt */
+  line-height: 1.4; /* Reduced from 1.5 */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-grid {
+  margin-bottom: 0.375rem; /* Reduced from 0.6rem */
+  gap: 0.375rem; /* Reduced from 0.5rem */
+}
+
+/* Compact KPI cards for A4 - Conclusion Page */
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-card {
+  padding: 0.4rem 0.625rem; /* Reduced from 0.65rem 0.8rem */
+  gap: 0.125rem; /* Reduced from 0.3rem */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-card::before {
+  height: 2px; /* Reduced from 3px */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-value {
+  font-size: 1.35rem; /* Reduced from 1.7rem */
+  margin-top: 0.125rem; /* Reduced from 0.15rem */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-label {
+  font-size: 0.65rem; /* Reduced from 0.73rem */
+  letter-spacing: 0.05em; /* Reduced from 0.06em */
+}
+
+.report-page[data-page-id="conclusion-and-next-steps"] .report-kpi-subtext {
+  font-size: 0.6875rem; /* Reduced from 0.76rem */
+}
+
+/* Prevent text overflow in KPI cards */
+.report-kpi-grid .report-kpi-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.report-kpi-grid .report-kpi-card .report-kpi-value {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  max-width: 100% !important;
+  font-size: 1.1rem !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.1rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Table overflow handling */
+.report-table-shell {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.report-compact-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.report-compact-table td,
+.report-compact-table th {
+  max-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Specific column overflow prevention */
+.report-compact-table td:nth-child(1),
+.report-compact-table td:nth-child(2) {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+/* Shared two-column evidence layout used by risk pages */
+.report-evidence-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+  align-items: start;
+}
+
+.report-footnote {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: var(--report-text-secondary);
+  line-height: 1.35;
+}
+
+/* Keep compact charts deterministic in height for both screen and print */
+.report-chart-container-compact {
+  height: 130px;
+  min-height: 130px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .report-evidence-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduce spacing for A4 fit */
+.report-page-content {
+  padding: 0;
+  gap: 0.625rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.report-page-title {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.88rem;
+  border: 1px solid var(--report-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.report-table-caption {
+  caption-side: top;
+  font-size: 0.8rem;
+  color: var(--report-muted);
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem; /* Prevent clipping by table border-radius */
+  text-align: left;
+}
+
+.report-table-title-offset {
+  margin-left: 0.125rem;
+}
+
+.report-table th,
+.report-table td {
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid var(--report-border);
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.report-table th {
+  background: var(--report-bg);
+  color: var(--report-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background: rgb(248 250 252 / 0.5);
+}
+
+.report-table-empty {
+  text-align: center;
+  color: #94a3b8;
+  padding: 20px;
+}
+
+.report-table-truncated {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: right;
+  margin-top: 0.25rem;
+}
+
+.report-chart-container {
+  padding: 1.5rem;
+}
+
+.report-chart-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.report-chart-col {
+  flex: 1;
+  background: var(--report-surface);
+  border: 1px solid var(--report-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.report-chart-col--wide {
+  flex: 2;
+}
+
+.report-chart-col .report-chart-container {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.report-chart-col .report-chart-title {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.report-highlight-box {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--report-primary);
+  background: var(--report-accent-light);
+  color: var(--report-text);
+}
+
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.severity-badge--low {
+  background: var(--report-success-light);
+  color: var(--report-success);
+}
+
+.severity-badge--medium {
+  background: var(--report-warning-light);
+  color: var(--report-warning);
+}
+
+.severity-badge--high,
+.severity-badge--critical {
+  background: var(--report-danger-light);
+  color: var(--report-danger);
+}
+
+.severity-badge--info {
+  background: var(--report-accent-light);
+  color: var(--report-accent);
+}
+
+.health-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.health-dot--healthy {
+  background: var(--report-success);
+  box-shadow: 0 0 0 4px var(--report-success-light);
+}
+
+.health-dot--watch {
+  background: var(--report-warning);
+  box-shadow: 0 0 0 4px var(--report-warning-light);
+}
+
+.health-dot--limited {
+  background: var(--report-danger);
+  box-shadow: 0 0 0 4px var(--report-danger-light);
+}
+
+.toc-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px dotted var(--report-muted);
+}
+
+.report-stat-strip {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  background: var(--report-bg);
+  border: 1px solid var(--report-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.report-stat-box {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.report-stat-number {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--report-text);
+  line-height: 1;
+}
+
+.report-stat-number--good {
+  color: var(--report-success);
+}
+
+.report-stat-number--warning {
+  color: var(--report-warning);
+}
+
+.report-stat-number--danger {
+  color: var(--report-danger);
+}
+
+.report-stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--report-muted);
+  text-transform: uppercase;
+}
+
+.report-key-value-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.report-key-value-table td {
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--report-border);
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.report-key-value-table td:first-child {
+  width: 38%;
+  font-weight: 600;
+  color: var(--report-muted);
+}
+
+/* Final page-fit safety: keep full content visible and rely on deterministic row limits rather than clipping. */
+/* Canonical A4 page behavior (final override for report sections) */
+.report-page[data-page-id] {
+  width: 210mm !important;
+  height: 297mm !important;
+  min-height: 297mm !important;
+  max-height: 297mm !important;
+  padding: 12.5mm 11.5mm !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.report-page[data-page-id] .report-page-content {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+  gap: 0.5rem !important;
+  padding: 0 !important;
+}
+
+.report-page[data-page-id] .report-section-header {
+  margin-bottom: 0.5rem !important;
+}
+
+.report-page[data-page-id] .report-section-title {
+  font-size: 1.2rem !important;
+  margin-bottom: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.report-page[data-page-id] .report-technical-details-header {
+  margin: 0 0 0.5rem 0 !important;
+  padding-bottom: 0.35rem !important;
+}
+
+.report-page[data-page-id] .report-footer {
+  margin-top: 0.45rem !important;
+  padding-top: 0.2rem !important;
+  flex: 0 0 auto !important;
+}
+
+.report-page[data-page-id] .report-kpi-grid {
+  margin-bottom: 0.5rem !important;
+  gap: 0.35rem !important;
+}
+
+.report-page[data-page-id] .report-kpi-card {
+  min-height: 88px !important;
+  padding: 0.35rem 0.5rem !important;
+}
+
+.report-page[data-page-id] .report-kpi-card .report-kpi-label {
+  font-size: 0.6rem !important;
+  line-height: 1.15 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.report-page[data-page-id] .report-kpi-card .report-kpi-subtext {
+  font-size: 0.72rem !important;
+  line-height: 1.2 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.report-page[data-page-id] .report-kpi-card .report-kpi-value {
+  font-size: 1.15rem !important;
+  line-height: 1.1 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.report-page[data-page-id] .report-summary-text,
+.report-page[data-page-id] .report-context-text {
+  font-size: 0.86rem !important;
+  line-height: 1.42 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.report-page[data-page-id] .report-evidence-block,
+.report-page[data-page-id] .report-asset-summary,
+.report-page[data-page-id] .report-monitoring-context,
+.report-page[data-page-id] .report-notable-paths {
+  padding: 0.45rem 0.6rem !important;
+  margin: 0 !important;
+}
+
+.report-page[data-page-id] .report-panel-title,
+.report-page[data-page-id] .report-evidence-title {
+  margin-bottom: 0.35rem !important;
+  font-size: 0.9rem !important;
+}
+
+.report-page[data-page-id] .report-table-shell {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.report-page[data-page-id] .report-table,
+.report-page[data-page-id] .report-compact-table,
+.report-page[data-page-id] .report-key-value-table {
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+.report-page[data-page-id] .report-table th,
+.report-page[data-page-id] .report-table td,
+.report-page[data-page-id] .report-compact-table th,
+.report-page[data-page-id] .report-compact-table td,
+.report-page[data-page-id] .report-key-value-table td {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  line-height: 1.32 !important;
+}
+
+.report-page[data-page-id] .report-table th,
+.report-page[data-page-id] .report-table td {
+  padding: 0.3rem 0.38rem !important;
+  font-size: 0.75rem !important;
+}
+
+.report-page[data-page-id] .report-compact-table th,
+.report-page[data-page-id] .report-compact-table td,
+.report-page[data-page-id] .report-key-value-table td {
+  padding: 0.28rem 0.34rem !important;
+  font-size: 0.78rem !important;
+}
+
+.report-page[data-page-id] .report-table-footer,
+.report-page[data-page-id] .report-footnote {
+  font-size: 0.68rem !important;
+  line-height: 1.25 !important;
+}
+
+.report-page[data-page-id] .report-chart-container-compact {
+  height: 96px !important;
+  min-height: 96px !important;
+}
+
+.report-key-value-table tr:last-child td {
+  border-bottom: none;
+}
+
+.report-diagram-panel {
+  min-height: 240px;
+}
+
+.report-action-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.report-action-card {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--report-border);
+  border-left: 4px solid var(--report-primary);
+  border-radius: 12px;
+  background: var(--report-bg);
+}
+
+.report-action-card--immediate {
+  border-left-color: var(--report-danger);
+}
+
+.report-action-card--short-term {
+  border-left-color: var(--report-warning);
+}
+
+.report-action-card--architecture {
+  border-left-color: var(--report-primary);
+}
+
+.toc-number {
+  font-weight: 700;
+  color: var(--report-primary);
+}
+
+.toc-title {
+  font-weight: 500;
+  color: var(--report-text);
+}
+
+.toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--report-muted);
+}
+
+.report-footer {
+  margin-top: auto;
+  padding-top: 4mm;
+  border-top: 1px solid var(--report-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--report-muted);
+  font-weight: 500;
+}
+
+.page-number::after {
+  content: counter(report-page);
+}
+
+.report-cover-page {
+  justify-content: center;
+}
+
+.report-cover-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.report-cover-shape--top {
+  top: -10%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, var(--report-accent-light) 0%, rgb(99 102 241 / 0.05) 100%);
+}
+
+.report-cover-shape--bottom {
+  bottom: -15%;
+  left: -15%;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, rgb(59 130 246 / 0.1) 0%, rgb(255 255 255 / 0) 100%);
+}
+
+.report-cover-header,
+.report-cover-content,
+.report-cover-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.report-cover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-cover-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--report-primary);
+  letter-spacing: -0.5px;
+}
+
+.report-cover-badge {
+  background: var(--report-danger-light);
+  color: var(--report-danger);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.report-cover-content {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 2rem;
+  border-left: 4px solid var(--report-primary);
+}
+
+.report-cover-meta {
+  margin-bottom: 1rem;
+  color: var(--report-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.report-cover-title {
+  margin: 0 0 1.5rem 0;
+  color: var(--report-text);
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+
+.report-cover-subtitle {
+  margin: 0 0 2.5rem 0;
+  color: var(--report-muted);
+  font-size: 1.1rem;
+}
+
+.report-cover-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.report-cover-detail-row {
+  display: flex;
+  font-size: 1.08rem;
+}
+
+.report-cover-detail-label {
+  width: 180px;
+  font-weight: 600;
+  color: var(--report-muted);
+}
+
+.report-cover-detail-value {
+  font-weight: 700;
+  color: var(--report-text);
+}
+
+.report-cover-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  color: var(--report-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ai-insight-skeleton {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  border: 1px solid var(--report-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.ai-skeleton-line {
+  height: 10px;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #dbeafe 25%, #eff6ff 50%, #dbeafe 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.ai-skeleton-line:last-child {
+  margin-bottom: 0;
+  width: 65%;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .report-container {
+    padding: 0 !important;
+    gap: 0 !important;
+    display: block;
+    background: none !important;
+  }
+
+  .report-result-card {
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .report-result-card::before {
+    display: none !important;
+  }
+
+  .report-page {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 0.5in;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .report-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .report-evidence-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .report-chart-container-compact {
+    height: 110px;
+    min-height: 110px;
+  }
+
+  .report-no-print {
+    display: none !important;
+  }
+}

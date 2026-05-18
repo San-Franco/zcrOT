@@ -1,0 +1,14 @@
+{
+  "name": "zcrot-frontend-demo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "npm --prefix ui run dev",
+    "build": "npm --prefix ui run build",
+    "build:check": "npm --prefix ui run build:check",
+    "preview": "npm --prefix ui run preview"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
